@@ -15,12 +15,18 @@ import me.bounser.nascraft.managers.currencies.CurrenciesManager;
 import me.bounser.nascraft.managers.currencies.Currency;
 import me.bounser.nascraft.market.MarketManager;
 import me.bounser.nascraft.market.unit.Item;
+import me.bounser.nascraft.market.resources.Category;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.util.StringUtil;
+import me.bounser.nascraft.inventorygui.*;
+import net.kyori.adventure.platform.bukkit.BukkitComponentSerializer;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.inventory.Inventory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -184,6 +190,53 @@ public class NascraftCommand extends Command {
                         MarketManager.getInstance().getAllItems().size() + " items (" +
                         MarketManager.getInstance().getAllParentItems().size() + " parents and " + (MarketManager.getInstance().getAllItems().size() - MarketManager.getInstance().getAllParentItems().size()) +
                         " childs) within " + Config.getInstance().getCategories().size() + " categories.");
+
+                // Refresh any open Nascraft GUIs so changes apply immediately
+                for (Player p : Bukkit.getOnlinePlayers()) {
+                    try {
+                        if (p.hasMetadata("NascraftMenu")) {
+                            String meta = p.getMetadata("NascraftMenu").get(0).asString();
+                            if (meta == null) {
+                                MarketMenuManager.getInstance().setMenuOfPlayer(p, new MainMenu(p));
+                                continue;
+                            }
+                            if (meta.equals("main-menu")) {
+                                MarketMenuManager.getInstance().setMenuOfPlayer(p, new MainMenu(p));
+                            } else if (meta.equals("alerts")) {
+                                MarketMenuManager.getInstance().setMenuOfPlayer(p, new AlertsMenu(p));
+                            } else if (meta.equals("limitorders")) {
+                                MarketMenuManager.getInstance().setMenuOfPlayer(p, new LimitOrdersMenu(p));
+                            } else if (meta.startsWith("category-menu-")) {
+                                String id = meta.substring(14);
+                                Category cat = MarketManager.getInstance().getCategoryFromIdentifier(id);
+                                if (cat != null) MarketMenuManager.getInstance().setMenuOfPlayer(p, new CategoryMenu(p, cat));
+                                else MarketMenuManager.getInstance().setMenuOfPlayer(p, new MainMenu(p));
+                            } else if (meta.startsWith("item-menu-")) {
+                                String id = meta.substring(10);
+                                Item item = MarketManager.getInstance().getItem(id.toLowerCase());
+                                if (item != null) MarketMenuManager.getInstance().setMenuOfPlayer(p, new BuySellMenu(p, item));
+                                else MarketMenuManager.getInstance().setMenuOfPlayer(p, new MainMenu(p));
+                            } else if (meta.startsWith("set-limit-order-")) {
+                                String id = meta.substring("set-limit-order-".length());
+                                Item item = MarketManager.getInstance().getItem(id.toLowerCase());
+                                if (item != null) MarketMenuManager.getInstance().setMenuOfPlayer(p, new SetLimitOrderMenu(p, item));
+                                else MarketMenuManager.getInstance().setMenuOfPlayer(p, new MainMenu(p));
+                            } else {
+                                MarketMenuManager.getInstance().setMenuOfPlayer(p, new MainMenu(p));
+                            }
+                        } else if (p.hasMetadata("NascraftPortfolio")) {
+                            // Rebuild the portfolio inventory view
+                            Component title = MiniMessage.miniMessage().deserialize(Lang.get().message(Message.PORTFOLIO_TITLE));
+                            Inventory inv = Bukkit.createInventory(p, 45, BukkitComponentSerializer.legacy().serialize(title));
+                            p.openInventory(inv);
+                            p.setMetadata("NascraftPortfolio", new FixedMetadataValue(Nascraft.getInstance(), false));
+                            me.bounser.nascraft.inventorygui.Portfolio.PortfolioInventory.getInstance().updatePortfolioInventory(p);
+                        }
+                    } catch (Exception ignored) {
+                        // Fallback to main menu on any error
+                        try { MarketMenuManager.getInstance().setMenuOfPlayer(p, new MainMenu(p)); } catch (Exception e2) { /* ignore */ }
+                    }
+                }
 
                 break;
 

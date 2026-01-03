@@ -61,6 +61,21 @@ main-menu:
       - 33
       - 34
       - 35
+      # Row 5–6 fillers (avoid custom button slots 36, 40, 44, 49)
+      - 37
+      - 38
+      - 39
+      - 41
+      - 42
+      - 43
+      - 45
+      - 46
+      - 47
+      - 48
+      - 50
+      - 51
+      - 52
+      - 53
 
   categories:
     item-list: true
@@ -74,7 +89,7 @@ main-menu:
       - 25
 
   custom-buttons:
-    100:
+    placeholder:
       slot: 18
       item:
         material: CHEST
@@ -90,7 +105,7 @@ main-menu:
         - "pshop"
       close-on-click: true
 
-    101:
+    placeholder1:
       slot: 27
       item:
         material: BELL
@@ -106,71 +121,61 @@ main-menu:
         - "auction"
       close-on-click: true
 
-    102:
+    placeholder2:
       slot: 36
       item:
         material: DRAGON_BREATH
         quantity: 1
-        name: "&dBlack Market"
+        name: "&dSIX SEVEN"
         lore:
-          - ""
-          - "&7Trade for exotic items"
-          - "&7that rotate every day."
-          - ""
-          - "&7Click to browse"
+          - "SIX SEVEN"
       commandsOnClick:
-        - "blackmarket"
+        - "SIX SEVEN"
       close-on-click: true
 
-    103:
+    placeholder3:
       slot: 26
       item:
         material: ANVIL
         quantity: 1
-        name: "&cForge"
+        name: "&SIX SEVEN"
         lore:
-          - ""
-          - "&7Repair shattered items, craft"
-          - "&7spawners and enhance your items."
-          - ""
-          - "&7Click to browse"
+          - "SIX SEVEN"
       commandsOnClick:
-        - "forge"
+        - "SIX SEVEN"
       close-on-click: true
 
-    104:
+    placeholder4:
       slot: 35
       item:
         material: ENCHANTING_TABLE
         quantity: 1
-        name: "&3Enchanter"
+        name: "&SIX SEVEN"
         lore:
           - ""
-          - "&7Trade in EXP for custom enchantment"
-          - "&7books and items to upgrade your gear."
-          - ""
-          - "&7Click to browse"
+          - "&7SIX SEVEN"
+          - "&7SIX SEVEN"
       commandsOnClick:
-        - "enchanter"
+        - "SIX SEVEN"
       close-on-click: true
 
-    105:
+    placeholder5:
       slot: 44
       item:
         material: DRAGON_HEAD
         quantity: 1
-        name: "&5Gavrik"
+        name: "&5SIX SEVEN"
         lore:
           - ""
-          - "&7Trade for rare exclusive items using"
-          - "&7souls gained from trading in mob heads."
+          - "&7SIX SEVEN"
+          - "&7SIX SEVEN"
           - ""
-          - "&7Click to browse"
+          - "&7SIX SEVEN"
       commandsOnClick:
-        - "gavrik"
+        - "SIX SEVEN"
       close-on-click: true
 
-    106:
+    placeholder6:
       slot: 40
       item:
         material: EMERALD
@@ -186,7 +191,7 @@ main-menu:
         - "sell"
       close-on-click: true
 
-    107:
+    placeholder7:
       slot: 49
       item:
         material: LODESTONE
@@ -195,7 +200,7 @@ main-menu:
         lore:
           - "&7Keystone"
       commandsOnClick:
-        - "keystone"
+        - "SIX SEVEN"
       close-on-click: true
 
 category-section:
@@ -545,55 +550,55 @@ portfolio:
       slot: 0
 
     positions:
-        1:
-          slot: 10
-        2:
-          slot: 11
-        3:
-          slot: 12
-        4:
-          slot: 22
-        5:
-          slot: 23
-        6:
-          slot: 24
-        7:
-          slot: 25
+      1:
+        slot: 10
+      2:
+        slot: 11
+      3:
+        slot: 12
+      4:
+        slot: 22
+      5:
+        slot: 23
+      6:
+        slot: 24
+      7:
+        slot: 25
 
     fillers:
-        1:
-          material: 'black_stained_glass_pane'
-          slots:
-            - 1
-            - 2
-            - 3
-            - 4
-            - 5
-            - 6
-            - 7
-            - 8
-            - 9
-            - 17
-            - 18
-            - 26
-            - 27
-            - 28
-            - 29
-            - 30
-            - 31
-            - 32
-            - 33
-            - 34
-            - 35
-        2:
-          material: 'gold_block'
-          slots:
-            - 19
-        3:
-          material: 'iron_block'
-          slots:
-            - 20
-        4:
-          material: 'copper_block'
-          slots:
-            - 21
+      1:
+        material: 'black_stained_glass_pane'
+        slots:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 17
+          - 18
+          - 26
+          - 27
+          - 28
+          - 29
+          - 30
+          - 31
+          - 32
+          - 33
+          - 34
+          - 35
+      2:
+        material: 'gold_block'
+        slots:
+          - 19
+      3:
+        material: 'iron_block'
+        slots:
+          - 20
+      4:
+        material: 'copper_block'
+        slots:
+          - 21
