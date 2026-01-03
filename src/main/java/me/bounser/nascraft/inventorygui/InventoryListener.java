@@ -20,6 +20,7 @@ import me.bounser.nascraft.market.limitorders.LimitOrdersManager;
 import me.bounser.nascraft.market.limitorders.OrderType;
 import me.bounser.nascraft.market.resources.Category;
 import me.bounser.nascraft.market.unit.Item;
+import me.bounser.nascraft.inventorygui.CustomButton;
 import net.kyori.adventure.platform.bukkit.BukkitComponentSerializer;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -521,6 +522,24 @@ public class InventoryListener implements Listener {
                     PortfolioInventory.getInstance().updatePortfolioInventory(player);
 
                     return;
+                }
+
+                // Custom buttons handling
+                List<CustomButton> customButtons = Config.getInstance().getMainMenuCustomButtons();
+                if (!customButtons.isEmpty()) {
+                    for (CustomButton btn : customButtons) {
+                        if (btn.getSlot() == slot) {
+                            if (btn.isCloseOnClick()) player.closeInventory();
+                            if (btn.getCommandsOnClick() != null) {
+                                for (String cmd : btn.getCommandsOnClick()) {
+                                    if (cmd == null || cmd.trim().isEmpty()) continue;
+                                    String toRun = cmd.startsWith("/") ? cmd.substring(1) : cmd;
+                                    player.performCommand(toRun);
+                                }
+                            }
+                            return;
+                        }
+                    }
                 }
 
                 List<Category> categories = MarketManager.getInstance().getCategories();

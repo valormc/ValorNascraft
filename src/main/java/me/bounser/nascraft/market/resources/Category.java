@@ -93,12 +93,14 @@ public class Category {
 
         for (Item item : items) {
 
-            Instant firstInstant = DatabaseManager.get().getDatabase().getDayPrices(item).getFirst();
+            List<Instant> dayPrices = DatabaseManager.get().getDatabase().getDayPrices(item);
+            if (dayPrices == null || dayPrices.isEmpty()) continue;
+            Instant firstInstant = dayPrices.get(0);
 
             if (firstInstant.getPrice() != 0 )
                 changes += ((item.getPrice().getValue() - firstInstant.getPrice()) / firstInstant.getPrice());
         }
-        return changes/items.size();
+        return items.isEmpty() ? 0 : changes/items.size();
     }
 
 }

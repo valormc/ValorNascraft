@@ -1,0 +1,599 @@
+# Nascraft inventorygui.yml - 1.9.3
+
+main-menu:
+  size: 54 # = 9 * 6
+
+  alerts:
+    enabled: true
+    slot: 8
+    linked:
+      material: 'bell'
+    not-linked:
+      material: 'bell'
+
+  limit-orders:
+    enabled: true
+    slot: 7
+    material: 'target'
+
+  information:
+    enabled: true
+    slot: 4
+    material: 'book'
+
+  portfolio:
+    enabled: true
+    slot: 5
+    linked:
+      material: 'chest'
+    not-linked:
+      material: 'chest'
+
+  trends:
+    enabled: true
+    slot: 3
+    material: 'paper'
+
+  fillers:
+    black_stained_glass_pane:
+      - 0
+      - 1
+      - 2
+      - 6
+    gray_stained_glass_pane:
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 26
+      - 27
+      - 28
+      - 29
+      - 30
+      - 31
+      - 32
+      - 33
+      - 34
+      - 35
+
+  categories:
+    item-list: true
+    slots:
+      - 19
+      - 20
+      - 21
+      - 22
+      - 23
+      - 24
+      - 25
+
+  custom-buttons:
+    100:
+      slot: 18
+      item:
+        material: CHEST
+        quantity: 1
+        name: "&6Player Shops"
+        lore:
+          - ""
+          - "&7Buy from and sell to player ran shops,"
+          - "&7you can set up your own shop at /shop."
+          - ""
+          - "&7Click to browse"
+      commandsOnClick:
+        - "pshop"
+      close-on-click: true
+
+    101:
+      slot: 27
+      item:
+        material: BELL
+        quantity: 1
+        name: "&9Auction House"
+        lore:
+          - ""
+          - "&7Buy and sell items on"
+          - "&7the community auction house."
+          - ""
+          - "&7Click to browse"
+      commandsOnClick:
+        - "auction"
+      close-on-click: true
+
+    102:
+      slot: 36
+      item:
+        material: DRAGON_BREATH
+        quantity: 1
+        name: "&dBlack Market"
+        lore:
+          - ""
+          - "&7Trade for exotic items"
+          - "&7that rotate every day."
+          - ""
+          - "&7Click to browse"
+      commandsOnClick:
+        - "blackmarket"
+      close-on-click: true
+
+    103:
+      slot: 26
+      item:
+        material: ANVIL
+        quantity: 1
+        name: "&cForge"
+        lore:
+          - ""
+          - "&7Repair shattered items, craft"
+          - "&7spawners and enhance your items."
+          - ""
+          - "&7Click to browse"
+      commandsOnClick:
+        - "forge"
+      close-on-click: true
+
+    104:
+      slot: 35
+      item:
+        material: ENCHANTING_TABLE
+        quantity: 1
+        name: "&3Enchanter"
+        lore:
+          - ""
+          - "&7Trade in EXP for custom enchantment"
+          - "&7books and items to upgrade your gear."
+          - ""
+          - "&7Click to browse"
+      commandsOnClick:
+        - "enchanter"
+      close-on-click: true
+
+    105:
+      slot: 44
+      item:
+        material: DRAGON_HEAD
+        quantity: 1
+        name: "&5Gavrik"
+        lore:
+          - ""
+          - "&7Trade for rare exclusive items using"
+          - "&7souls gained from trading in mob heads."
+          - ""
+          - "&7Click to browse"
+      commandsOnClick:
+        - "gavrik"
+      close-on-click: true
+
+    106:
+      slot: 40
+      item:
+        material: EMERALD
+        quantity: 1
+        name: "&aSell your items"
+        lore:
+          - ""
+          - "&7Sell your items"
+          - "&7to gain money."
+          - ""
+          - "&7Click to sell"
+      commandsOnClick:
+        - "sell"
+      close-on-click: true
+
+    107:
+      slot: 49
+      item:
+        material: LODESTONE
+        quantity: 1
+        name: "&fGo Back"
+        lore:
+          - "&7Keystone"
+      commandsOnClick:
+        - "keystone"
+      close-on-click: true
+
+category-section:
+  size: 36 # = 9 * 3
+
+  category-item:
+    slot: 4
+
+  back-button:
+    enabled: true
+    slot: 0
+    material: 'arrow'
+
+  next-button:
+    enabled: true
+    slot: 8
+    material: 'arrow'
+
+  fillers:
+    material: 'black_stained_glass_pane'
+    slots:
+      - 1
+      - 2
+      - 3
+      - 5
+      - 6
+      - 7
+      - 9
+      - 17
+      - 18
+      - 26
+      - 27
+      - 28
+      - 29
+      - 30
+      - 31
+      - 32
+      - 33
+      - 34
+      - 35
+
+  items:
+    slots:
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 19
+      - 20
+      - 21
+      - 22
+      - 23
+      - 24
+      - 25
+
+buy-sell:
+
+  size: 27 # = 9 * 3
+
+  alerts:
+    slot: 22
+    material: 'bell'
+
+  limit-orders:
+    slot: 8
+    material: 'target'
+
+  info:
+    slot: 4
+    material: 'filled_map'
+
+  item:
+    slot: 13
+
+  back-button:
+    slot: 0
+    material: 'arrow'
+
+  fillers:
+    material: 'black_stained_glass_pane'
+    slots:
+      - 1
+      - 2
+      - 3
+      - 5
+      - 6
+      - 7
+      - 18
+      - 19
+      - 20
+      - 21
+      - 23
+      - 24
+      - 25
+      - 26
+
+  buy-buttons:
+    material: 'lime_candle'
+    buttons:
+      1:
+        slot: 12
+      8:
+        slot: 11
+      32:
+        slot: 10
+      64:
+        slot: 9
+
+  sell-buttons:
+    material: 'red_candle'
+    buttons:
+      1:
+        slot: 14
+      8:
+        slot: 15
+      32:
+        slot: 16
+      64:
+        slot: 17
+
+alerts:
+
+  size: 27
+
+  back-button:
+    enabled: true
+    slot: 0
+    material: 'arrow'
+
+  fillers:
+    material: 'black_stained_glass_pane'
+    slots:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 18
+      - 19
+      - 20
+      - 21
+      - 22
+      - 23
+      - 24
+      - 25
+      - 26
+
+  alerts:
+    slots:
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+
+limit-orders:
+
+  size: 27
+
+  back-button:
+    enabled: true
+    slot: 0
+    material: 'arrow'
+
+  fillers:
+    material: 'black_stained_glass_pane'
+    slots:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 18
+      - 19
+      - 20
+      - 21
+      - 22
+      - 23
+      - 24
+      - 25
+      - 26
+
+  orders:
+    slots:
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+
+set-limit-orders:
+
+  size: 27
+
+  back-button:
+    material: 'arrow'
+    slot: 0
+
+  item:
+    slot: 4
+
+  time:
+    material: 'clock'
+    slot: 12
+
+  price:
+    material: 'name_tag'
+    slot: 13
+
+  quantity:
+    material: 'writable_book'
+    slot: 14
+
+  confirm-sell:
+    material: 'red_candle'
+    slot: 10
+
+  confirm-buy:
+    material: 'lime_candle'
+    slot: 16
+
+  fillers:
+    material: 'black_stained_glass_pane'
+    slots:
+      - 1
+      - 2
+      - 3
+      - 5
+      - 6
+      - 7
+      - 8
+      - 18
+      - 19
+      - 20
+      - 21
+      - 22
+      - 23
+      - 24
+      - 25
+      - 26
+
+portfolio:
+
+  back-button:
+    enabled: true
+    slot: 0
+    material: 'arrow'
+
+  info:
+    enabled: true
+    slot: 4
+
+  loan:
+    enabled: true
+    slot: 5
+    material: 'paper'
+
+  leaderboard:
+    enabled: true
+    slot: 8
+    material: 'book'
+
+  debt:
+
+    size: 27
+
+    back-button:
+      enabled: true
+      material: 'arrow'
+      slot: 0
+
+    exp:
+      enabled: true
+      slot: 4
+      material: paper
+
+    info:
+      enabled: true
+      slot: 13
+      material: book
+
+    repay-all:
+      enabled: true
+      slot: 10
+      material: 'lime_stained_glass_pane'
+
+    repay-custom:
+      enabled: true
+      slot: 11
+      material: 'lime_candle'
+
+    get-max-loan:
+      enabled: true
+      slot: 16
+      material: 'red_stained_glass_pane'
+
+    custom-loan:
+      enabled: true
+      slot: 15
+      material: 'red_candle'
+
+    fillers:
+      material: 'black_stained_glass_pane'
+      slots:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 18
+        - 19
+        - 20
+        - 21
+        - 22
+        - 23
+        - 24
+        - 25
+        - 26
+
+  top:
+
+    size: 36
+
+    back-button:
+      enabled: true
+      material: 'arrow'
+      slot: 0
+
+    positions:
+        1:
+          slot: 10
+        2:
+          slot: 11
+        3:
+          slot: 12
+        4:
+          slot: 22
+        5:
+          slot: 23
+        6:
+          slot: 24
+        7:
+          slot: 25
+
+    fillers:
+        1:
+          material: 'black_stained_glass_pane'
+          slots:
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+            - 8
+            - 9
+            - 17
+            - 18
+            - 26
+            - 27
+            - 28
+            - 29
+            - 30
+            - 31
+            - 32
+            - 33
+            - 34
+            - 35
+        2:
+          material: 'gold_block'
+          slots:
+            - 19
+        3:
+          material: 'iron_block'
+          slots:
+            - 20
+        4:
+          material: 'copper_block'
+          slots:
+            - 21

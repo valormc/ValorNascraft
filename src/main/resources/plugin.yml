@@ -1,4 +1,4 @@
-name: Nascraft
+name: NascraftValor
 version: '${project.version}'
 main: me.bounser.nascraft.Nascraft
 api-version: 1.13

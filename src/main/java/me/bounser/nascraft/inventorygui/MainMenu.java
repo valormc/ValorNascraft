@@ -22,6 +22,9 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.ChatColor;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +35,45 @@ public class MainMenu implements MenuPage {
     private final Player player;
 
     private Inventory gui;
+
+    private static final Pattern HEX6 = Pattern.compile("#([A-Fa-f0-9]{6})");
+    private static final Pattern HEX3 = Pattern.compile("#([A-Fa-f0-9]{3})(?![A-Fa-f0-9])");
+
+    private static String colorize(String s) {
+        if (s == null || s.isEmpty()) return s;
+        String out = s;
+        // Replace #RRGGBB first
+        Matcher m = HEX6.matcher(out);
+        StringBuffer sb = new StringBuffer();
+        while (m.find()) {
+            String hex = m.group(1);
+            StringBuilder rep = new StringBuilder("§x");
+            for (char c : hex.toCharArray()) {
+                rep.append('§').append(Character.toUpperCase(c));
+            }
+            m.appendReplacement(sb, Matcher.quoteReplacement(rep.toString()));
+        }
+        m.appendTail(sb);
+        out = sb.toString();
+
+        // Then replace #RGB (shorthand)
+        m = HEX3.matcher(out);
+        sb.setLength(0);
+        while (m.find()) {
+            String h = m.group(1);
+            String hex = "" + h.charAt(0) + h.charAt(0) + h.charAt(1) + h.charAt(1) + h.charAt(2) + h.charAt(2);
+            StringBuilder rep = new StringBuilder("§x");
+            for (char c : hex.toCharArray()) {
+                rep.append('§').append(Character.toUpperCase(c));
+            }
+            m.appendReplacement(sb, Matcher.quoteReplacement(rep.toString()));
+        }
+        m.appendTail(sb);
+        out = sb.toString();
+
+        // Finally apply legacy & codes
+        return ChatColor.translateAlternateColorCodes('&', out);
+    }
 
     public MainMenu(Player player) {
         this.player = player;
@@ -252,6 +294,34 @@ public class MainMenu implements MenuPage {
             for (int i : fillers.get(material))
                 gui.setItem(i, filler);
 
+        }
+
+        // Custom buttons
+        List<CustomButton> customButtons = config.getMainMenuCustomButtons();
+        if (!customButtons.isEmpty()) {
+            for (CustomButton btn : customButtons) {
+                ItemStack stack = new ItemStack(btn.getMaterial());
+                stack.setAmount(Math.max(1, btn.getQuantity()));
+                ItemMeta meta = stack.getItemMeta();
+                if (btn.getName() != null && !btn.getName().isEmpty()) {
+                    meta.setDisplayName(colorize(btn.getName()));
+                } else {
+                    // default to material name prettified
+                    meta.setDisplayName(colorize("&f" + btn.getMaterial().name()));
+                }
+                if (btn.getLore() != null && !btn.getLore().isEmpty()) {
+                    List<String> loreLines = new ArrayList<>();
+                    for (String l : btn.getLore()) {
+                        loreLines.add(colorize(l == null ? "" : l));
+                    }
+                    meta.setLore(loreLines);
+                }
+                meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+                stack.setItemMeta(meta);
+                if (btn.getSlot() >= 0 && btn.getSlot() < gui.getSize()) {
+                    gui.setItem(btn.getSlot(), stack);
+                }
+            }
         }
 
         // Categories

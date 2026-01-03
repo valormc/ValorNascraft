@@ -22,6 +22,7 @@ import me.bounser.nascraft.Nascraft;
 import me.bounser.nascraft.database.DatabaseManager;
 import me.bounser.nascraft.database.DatabaseType;
 import me.bounser.nascraft.discord.linking.LinkingMethod;
+import me.bounser.nascraft.inventorygui.CustomButton;
 import me.bounser.nascraft.managers.currencies.CurrenciesManager;
 import me.bounser.nascraft.managers.currencies.Currency;
 import me.bounser.nascraft.managers.currencies.CurrencyType;
@@ -33,6 +34,7 @@ import me.bounser.nascraft.sellwand.Wand;
 import de.tr7zw.changeme.nbtapi.NBT;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.block.Action;
@@ -861,11 +863,42 @@ public class Config {
 
     public HashMap<Material, List<Integer>> getMainMenuFillers() {
         HashMap<Material, List<Integer>> fills = new HashMap<Material, List<Integer>>();
-        for (String section : this.inventorygui.getConfigurationSection("main-menu.fillers.").getKeys(false)) {
-            Material material = Material.valueOf((String)section.toUpperCase());
-            fills.put(material, this.inventorygui.getIntegerList("main-menu.fillers." + section));
+        ConfigurationSection fillersSection = this.inventorygui.getConfigurationSection("main-menu.fillers.");
+        if (fillersSection != null) {
+            for (String section : fillersSection.getKeys(false)) {
+                Material material = Material.valueOf(section.toUpperCase());
+                fills.put(material, this.inventorygui.getIntegerList("main-menu.fillers." + section));
+            }
         }
         return fills;
+    }
+
+    public List<CustomButton> getMainMenuCustomButtons() {
+        List<CustomButton> buttons = new ArrayList<>();
+        String base = "main-menu.custom-buttons";
+        if (!this.inventorygui.contains(base)) return buttons;
+        ConfigurationSection section = this.inventorygui.getConfigurationSection(base);
+        if (section == null) return buttons;
+        for (String key : section.getKeys(false)) {
+            try {
+                int id;
+                try { id = Integer.parseInt(key); } catch (NumberFormatException ex) { id = -1; }
+                String path = base + "." + key + ".";
+                int slot = this.inventorygui.getInt(path + "slot");
+                String matStr = this.inventorygui.getString(path + "item.material");
+                if (matStr == null) continue;
+                Material material = Material.valueOf(matStr.toUpperCase());
+                int quantity = this.inventorygui.getInt(path + "item.quantity", 1);
+                String name = this.inventorygui.getString(path + "item.name", "");
+                List<String> lore = this.inventorygui.getStringList(path + "item.lore");
+                if (lore == null) lore = new ArrayList<>();
+                List<String> commands = this.inventorygui.getStringList(path + "commandsOnClick");
+                if (commands.isEmpty()) commands = this.inventorygui.getStringList(path + "commands-on-click");
+                boolean close = this.inventorygui.getBoolean(path + "close-on-click", true);
+                buttons.add(new CustomButton(id, slot, material, quantity, name, lore, commands, close));
+            } catch (Exception ignored) {}
+        }
+        return buttons;
     }
 
     public boolean getSetCategorySegments() {
