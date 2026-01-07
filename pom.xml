@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.bounser</groupId>
-    <artifactId>Nascraft</artifactId>
+    <artifactId>ValorNascraft</artifactId>
     <version>1.9.3</version>
     <packaging>jar</packaging>
 
-    <name>Nascraft</name>
+    <name>ValorNascraft</name>
 
     <description>Market valuations in minecraft</description>
     <properties>

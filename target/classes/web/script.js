@@ -787,7 +787,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const name = itemData?.name ?? 'Unknown';
 
             tooltip.html(`
-                <div class="font-semibold">Nascraft</div>
+                <div class="font-semibold">ValorNascraft</div>
                 <div>Price: ${formatCurrency(price)}</div>
                 <div>Change: <span class="${getTrendClass(change)}">${formatTrend(change, true, '-')}</span></div>
             `)
